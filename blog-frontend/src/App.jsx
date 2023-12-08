@@ -1,30 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import Home from './pages/Home';
+import CreateArticle from './components/CreateArticle';
 
-function App() {
-  const [count, setCount] = useState(0)
+import './App.css';
 
+const App = () => {
   return (
-    <>
-      <div>
-        <img src={reactLogo} className="logo react" alt="React logo" />
-        
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Iniciemos el blog
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" exact Component={Home} />
+        <Route path='/crear-articulo' exact Component={CreateArticle}/>
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
