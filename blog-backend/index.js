@@ -1,8 +1,16 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const port = 3000
 const requestLogger = require('./src/middlewares/requestLogger')
 const postRouter = require('./src/routes/post')
+
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json())
 

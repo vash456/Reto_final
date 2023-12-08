@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-const CreateArticle = ({ username }) => {
+const CreateArticle = ({ userId }) => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -15,7 +15,9 @@ const CreateArticle = ({ username }) => {
             const response = await axios.post('http://localhost:3000/posts',{
                 title: title,
                 content: content,
-                username: username,
+                user_id: userId,
+                },{
+                    withCredentials: true,
                 });
                 console.log('respuesta del backend', response.data);
                 setTitle('');
@@ -59,7 +61,7 @@ const CreateArticle = ({ username }) => {
 };
 
 CreateArticle.propTypes = {
-    username: PropTypes.string.isRequired,
+    userId: PropTypes.number.isRequired,
 };
 
 export default CreateArticle;

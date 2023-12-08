@@ -12,7 +12,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element = {<Home/>} />
-        <Route path='/crear-articulo' element = {<CreateArticle username = 'Nombre de usuario'/>} />
+        <Route path='/crear-articulo' element = {<CreateArticle userId = {1}/>} />
         <Route path='/registrar-usuario' element = {<UserRegister />} />
       </Routes>
     </Router>
