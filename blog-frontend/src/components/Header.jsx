@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button, Row, Col } from 'react-bootstrap';
 import blogLogo from '../assets/logo.svg';
 
-const Header = ({ isLoggedIn=false, userName='Juan Carlos', handleLogout }) => {
+const Header = ({ isLoggedIn=true, userName='Juan Carlos', handleLogout }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -68,12 +68,14 @@ const Header = ({ isLoggedIn=false, userName='Juan Carlos', handleLogout }) => {
                 <Col>
                 <Button variant='outline-info' className='mr-1' onClick={handleLogin}>Login</Button>
                 </Col>
+                <Nav className='mr-auto'>
+                  <Link to='/registrar-usuario' >Registrarse</Link>
+                </Nav>
               </Row>
+
             )}
           </Form>
-          <Nav className='mr-auto'>
-            <Link to='/registrar-usuario' >Registrarse</Link>
-          </Nav>
+          
         </Navbar.Collapse>
       </Container>
     </Navbar>
