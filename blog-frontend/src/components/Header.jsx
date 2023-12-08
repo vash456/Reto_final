@@ -27,7 +27,7 @@ const Header = ({ isLoggedIn=false, userName='Juan Carlos', handleLogout }) => {
   return (
     <Navbar className='bg-dark expand-lg'>
       <Container>
-        <Navbar.Brand>
+        <Navbar.Brand className='bg-dark'>
           <Link to='/'>
             <img
               alt="Logo"
@@ -39,12 +39,12 @@ const Header = ({ isLoggedIn=false, userName='Juan Carlos', handleLogout }) => {
             Crypto Blog
           </Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className='bg-dark' />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
           <Nav className='mr-auto'>
             <Link to='/' style={{marginRight: '40px'}}>Artículos</Link>
           </Nav>
-          <Form inline='true'>
+          <Form inline="true">
             {isLoggedIn ? (
               <NavDropdown 
                 title={userName} 
@@ -66,12 +66,14 @@ const Header = ({ isLoggedIn=false, userName='Juan Carlos', handleLogout }) => {
                 <FormControl type='password' placeholder='Contraseña' value={password} className='mr-2' onChange={(e)=> setPassword(e.target.value)}/>
                 </Col>
                 <Col>
-                <Button variant='outline-info' className='mr-2' onClick={handleLogin}>Login</Button>
+                <Button variant='outline-info' className='mr-1' onClick={handleLogin}>Login</Button>
                 </Col>
               </Row>
             )}
           </Form>
-
+          <Nav className='mr-auto'>
+            <Link to='/user-register' >Registrarse</Link>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

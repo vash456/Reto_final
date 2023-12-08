@@ -1,15 +1,28 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import axios from 'axios';
+import PropTypes from 'prop-types';
 
-const CreateArticle = () => {
+const CreateArticle = ({ username }) => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(title);
-        console.log(content);
+        
+        try {
+            const response = await axios.post('http://localhost:3000/api/crear.articulo',{
+                title: title,
+                content: content,
+                username: username,
+                });
+                console.log('respuesta del backend', response.data);
+                setTitle('');
+                setContent('');
+        }catch (error) {
+            console.error('error al enviar datos al backend: ', error);
+        }
     }
 
     return (
@@ -44,4 +57,9 @@ const CreateArticle = () => {
         </div>
     )
 };
+
+CreateArticle.propTypes = {
+    username: PropTypes.string.isRequired,
+};
+
 export default CreateArticle;

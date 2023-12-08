@@ -10,8 +10,8 @@ const App = () => {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" exact Component={Home} />
-        <Route path='/crear-articulo' exact Component={CreateArticle}/>
+        <Route path="/" element = {<Home/>} />
+        <Route path='/crear-articulo' element = {<CreateArticle username = 'Nombre de usuario'/>} />
       </Routes>
     </Router>
   );
