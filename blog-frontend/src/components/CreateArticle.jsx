@@ -12,7 +12,7 @@ const CreateArticle = ({ username }) => {
         event.preventDefault();
         
         try {
-            const response = await axios.post('http://localhost:3000/api/crear.articulo',{
+            const response = await axios.post('http://localhost:3000/api/crear-articulo',{
                 title: title,
                 content: content,
                 username: username,

@@ -72,7 +72,7 @@ const Header = ({ isLoggedIn=false, userName='Juan Carlos', handleLogout }) => {
             )}
           </Form>
           <Nav className='mr-auto'>
-            <Link to='/user-register' >Registrarse</Link>
+            <Link to='/registrar-usuario' >Registrarse</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
