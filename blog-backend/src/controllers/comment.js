@@ -4,7 +4,7 @@ const createComment = async (req, res) => {
     try {
         const { name, comment, email, status, post_id } = req.body;
         const commentResult = await commentService.saveNewComment(name, comment, email, status, post_id);
-        res.json(commentResult);
+        res.status(201).send('Comment added successfully')
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -26,7 +26,7 @@ const getComment = async (req, res) => {
 const getComments = async (req, res) => {
     try {
         const comments = await commentService.getComments();
-        res.json(comments);
+        res.status(201).send('Comment updated successfully')
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

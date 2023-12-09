@@ -4,7 +4,7 @@ const createPost = async (req, res) => {
     try {
         const { title, brief, content, image, status, user_id } = req.body;
         const post = await postService.saveNewPost(title, brief, content, image, status, user_id);
-        res.json(post);
+        res.status(201).send('Post added successfully')
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -49,7 +49,7 @@ const updatePost = async (req, res) => {
     try {
         const { title, brief, content, image, status, user_id } = req.body;
         const post = await postService.updatePost(req.params.id, title, brief, content, image, status, user_id);
-        res.json(post);
+        res.status(201).send('Post updated successfully')
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
