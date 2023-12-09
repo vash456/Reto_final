@@ -15,13 +15,13 @@ CREATE TABLE "POSTS"(
 
 INSERT INTO "POSTS"(TITLE, BRIEF, CONTENT, IMAGE, CREATED_AT, STATUS, USER_ID)
 VALUES
-    ('post1', 'brief1', 'conten1', 'image1.jpg', '2023/11/01 13:00:00', 1, 1),
-    ('post2', 'brief2', 'conten2', 'image2.jpg', '2023/11/01 13:00:00', 1, 2),
-    ('post3', 'brief3', 'conten3', 'image3.jpg', '2023/11/01 13:00:00', 1, 3),
-    ('post4', 'brief4', 'conten4', 'image4.jpg', '2023/11/01 13:00:00', 1, 4),
-    ('post5', 'brief5', 'conten5', 'image5.jpg', '2023/11/01 13:00:00', 1, 2),
-    ('post6', 'brief6', 'conten6', 'image6.jpg', '2023/11/01 13:00:00', 1, 2),
-    ('post7', 'brief7', 'conten7', 'image7.jpg', '2023/11/01 13:00:00', 1, 1);
+    ('post1', 'brief1', 'conten1', 'image1.jpg', '2023/11/01 11:00:00', 1, 1),
+    ('post2', 'brief2', 'conten2', 'image2.jpg', '2023/11/02 12:00:00', 1, 2),
+    ('post3', 'brief3', 'conten3', 'image3.jpg', '2023/11/03 13:00:00', 1, 3),
+    ('post4', 'brief4', 'conten4', 'image4.jpg', '2023/11/04 14:00:00', 1, 4),
+    ('post5', 'brief5', 'conten5', 'image5.jpg', '2023/11/05 15:00:00', 1, 2),
+    ('post6', 'brief6', 'conten6', 'image6.jpg', '2023/11/06 16:00:00', 1, 2),
+    ('post7', 'brief7', 'conten7', 'image7.jpg', '2023/11/07 17:00:00', 1, 1);
 
 
 SELECT * FROM "POSTS"
