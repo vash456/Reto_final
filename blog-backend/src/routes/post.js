@@ -7,6 +7,7 @@ router.post('/', postController.createPost);
 
 // Protected endpoints 
 router.get('/all', postController.getPosts)
+router.get('/user/:id', postController.getPostsUser)
 router.get('/:id', postController.getPost)
 router.patch('/:id', postController.updatePost)
 router.delete('/:id', postController.deletePost)

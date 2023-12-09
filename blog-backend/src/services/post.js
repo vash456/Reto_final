@@ -10,6 +10,15 @@ async function getPost(postId) {
     return post
 }
 
+async function getPostsUser(userId) {
+    const posts = await models.Posts.findAll({
+        where: {
+          user_id: userId
+        }
+      })
+    return posts
+}
+
 async function saveNewPost(title, brief, content, image, status, user_id) {
     const postCreated = await models.Posts.create({
         title: title,
@@ -45,6 +54,7 @@ async function deletePost(postId) {
 module.exports = {
     getPost,
     getPosts,
+    getPostsUser,
     deletePost,
     updatePost,
     saveNewPost

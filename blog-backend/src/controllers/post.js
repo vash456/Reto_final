@@ -32,6 +32,19 @@ const getPosts = async (req, res) => {
     }
 };
 
+const getPostsUser = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const posts = await postService.getPostsUser(userId);
+        if (!posts) {
+            res.status(404).send('Posts by user not found')
+        }
+        res.json(posts);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 const updatePost = async (req, res) => {
     try {
         const { title, brief, content, image, status, user_id } = req.body;
@@ -57,6 +70,7 @@ module.exports = {
     createPost,
     getPost,
     getPosts,
+    getPostsUser,
     updatePost,
     deletePost
 };
