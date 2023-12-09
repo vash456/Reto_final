@@ -4,6 +4,8 @@ const app = express()
 const port = 3000
 const requestLogger = require('./src/middlewares/requestLogger')
 const postRouter = require('./src/routes/post')
+const commentRouter = require('./src/routes/comment')
+const userRouter = require('./src/routes/user')
 
 const corsOptions = {
     origin: 'http://localhost:5173',
@@ -19,6 +21,8 @@ app.use(express.json())
 app.use(requestLogger);
 
 app.use('/posts', postRouter)
+app.use('/comments', commentRouter)
+app.use('/users', userRouter)
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`)

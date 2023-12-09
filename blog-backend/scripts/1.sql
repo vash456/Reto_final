@@ -4,7 +4,7 @@ CREATE TABLE "USERS"(
     id serial primary key NOT NULL,
     name varchar(50),
 	lastname varchar(50),
-	username varchar(50),
+	username varchar(50) NOT NULL UNIQUE,
 	email varchar(255),
 	password varchar(60),
 	image varchar(255),
