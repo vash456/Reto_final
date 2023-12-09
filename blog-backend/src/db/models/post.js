@@ -39,6 +39,9 @@ const PostSchema = {
             len: [0, 255]
         }
     },
+    created_at: {
+        type: DataTypes.DATE
+    },
     status: {
         type: DataTypes.INTEGER,
         allowNull: false,

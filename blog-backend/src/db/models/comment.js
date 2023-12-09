@@ -36,6 +36,9 @@ const CommentSchema = {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    created_at: {
+        type: DataTypes.DATE
+    },
     status: {
         type: DataTypes.INTEGER,
         allowNull: false,
