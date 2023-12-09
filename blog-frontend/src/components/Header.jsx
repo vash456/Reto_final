@@ -25,7 +25,7 @@ const Header = ({ isLoggedIn=true, userName='Juan Carlos', handleLogout }) => {
   };
 
   return (
-    <Navbar className='bg-dark expand-lg'>
+    <Navbar className='bg-dark expand-lg sticky-top'>
       <Container>
         <Navbar.Brand className='bg-dark'>
           <Link to='/'>
