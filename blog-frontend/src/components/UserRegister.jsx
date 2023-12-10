@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Form, Toast } from "react-bootstrap";
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 const UserRegister = () => {
 
@@ -11,6 +12,8 @@ const UserRegister = () => {
         email: '',
         password: '',
     });
+
+    const [isRegistered, setIsRegistered] = useState(false);
 
     const [errors, setErrors] = useState({
         name: '',
@@ -84,19 +87,9 @@ const UserRegister = () => {
             }, {
                 withCredentials: true,
             });
-            // Mostrar mensaje de exito al enviar los datos
             setShowToast(true);
-
-            // vaciar los campos del form
-            setUserData({
-                name: '',
-                lastname: '',
-                username: '',
-                email: '',
-                password: '',
-            })
-
-            console.log('Respuesta del backend', response.data);
+            setIsRegistered(true);
+            console.log('Respuesta del backend: ', response.data);
 
         }catch(error){
             console.error('Error al enviar los datos al backend', error);
@@ -106,6 +99,7 @@ const UserRegister = () => {
 
     return (
         <div className='mt-5 mx-auto' style={{background: '#4285f4', padding: '20px', maxWidth: '500px', borderRadius:'10px'}}>
+            {isRegistered && <Navigate to="/" />}
             <Form style={{ maxWidth: '480px' }} onSubmit={handleSubmit}>
                 <h3 className="text-center">Regístrate</h3>
                 <Form.Group controlId="formName" className='mt-3'>
@@ -180,7 +174,7 @@ const UserRegister = () => {
                 <Toast.Header>
                     <strong className="mr-auto">Éxito!</strong>
                 </Toast.Header>
-                <Toast.Body>Se creó el artículo exitosamente</Toast.Body>
+                <Toast.Body>Se registró exitósamente</Toast.Body>
             </Toast>
         </div>
     );
