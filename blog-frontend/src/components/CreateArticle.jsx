@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button, Form, Toast } from "react-bootstrap";
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import { useAuth } from '../contexts/AuthContext';
 
 const CreateArticle = () => {
@@ -165,15 +164,10 @@ const CreateArticle = () => {
                 <Toast.Header>
                     <strong className="mr-auto">Éxito!</strong>
                 </Toast.Header>
-                <Toast.Body>Se registró exitósamente</Toast.Body>
+                <Toast.Body>Se creó el artículo exitosamente</Toast.Body>
             </Toast>
 
         </div>
     );
 };
-
-CreateArticle.propTypes = {
-    userId: PropTypes.number.isRequired,
-};
-
 export default CreateArticle;

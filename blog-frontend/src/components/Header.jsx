@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button, Row, Col } from 'react-bootstrap';
 import blogLogo from '../assets/logo.svg';
@@ -29,7 +30,11 @@ const Header = () => {
       });
       if(response.data.success){
         console.log('inicio de sesión exitoso');
-        login(response.data);
+        const token = response.data.token;
+        const decodedToken = jwtDecode(token);
+        const usernameFromToken = decodedToken.username;
+        const userIdFromToken = decodedToken.user_id;
+        login(usernameFromToken, userIdFromToken);
       }else{
         console.log('Datos incorrectos');
       }
@@ -88,7 +93,7 @@ const Header = () => {
             ):(
               <Row>
                 <Col>
-                <FormControl type='text' name='username' placeholder='Usuario' value={userData.username} className='mr-1' onChange={handleChange} />
+                <FormControl type='text' name='username' placeholder='Usuario' value={userData.username} autoComplete="username" className='mr-1' onChange={handleChange} />
                 </Col>
                 <Col>
                 <FormControl type='password' name='password' placeholder='Contraseña' value={userData.password} className='mr-1' onChange={handleChange}/>
