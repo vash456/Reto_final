@@ -12,7 +12,7 @@ const createUser = async (req, res) => {
 
 const getUser = async (req, res) => {
     try {
-        const userId = req.params.id
+        const userId = req.params.userId
         const user = await userService.getUser(userId);
         if (!user) {
             res.status(404).send('User not found')
@@ -35,7 +35,7 @@ const getUsers = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { name, lastname, username, email, password, image } = req.body;
-        const user = await userService.updateUser(req.params.id, name, lastname, username, email, password, image);
+        const user = await userService.updateUser(req.params.userId, name, lastname, username, email, password, image);
         res.status(201).send('User updated successfully')
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -44,7 +44,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.params.userId;
         await userService.deleteUser(userId)
         res.status(204).send()
     } catch (err) {

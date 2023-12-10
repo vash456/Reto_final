@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize')
+const { Model, DataTypes, Sequelize } = require('sequelize')
 
 const POST_TABLE = 'POSTS'
 
@@ -40,7 +40,8 @@ const PostSchema = {
         }
     },
     created_at: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     },
     status: {
         type: DataTypes.INTEGER,

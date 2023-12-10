@@ -34,7 +34,7 @@ const getPosts = async (req, res) => {
 
 const getPostsUser = async (req, res) => {
     try {
-        const userId = req.params.id
+        const userId = req.params.userId
         const posts = await postService.getPostsUser(userId);
         if (!posts) {
             res.status(404).send('Posts by user not found')

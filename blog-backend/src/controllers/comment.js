@@ -34,8 +34,8 @@ const getComments = async (req, res) => {
 
 const getCommentsPost = async (req, res) => {
     try {
-        const userId = req.params.id
-        const comments = await commentService.getCommentsPost(userId);
+        const postId = req.params.id
+        const comments = await commentService.getCommentsPost(postId);
         if (!comments) {
             res.status(404).send('Comments by user not found')
         }

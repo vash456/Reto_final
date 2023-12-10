@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/user');
 const validateUser = require('../middlewares/usersValidation')
 const isAuthenticated = require('../middlewares/authValidation')
+const authorize = require('../middlewares/userRoleValidation');
 
 // Unprotected endpoints
 router.post('/', validateUser, userController.createUser);
@@ -11,9 +12,9 @@ router.post('/', validateUser, userController.createUser);
 router.use(isAuthenticated)
 
 // Protected endpoints 
-router.get('/all', userController.getUsers)
-router.get('/:id', userController.getUser)
-router.patch('/:id', validateUser, userController.updateUser)
-router.delete('/:id', userController.deleteUser)
+router.get('/all', authorize(2), userController.getUsers)
+router.get('/:userId', authorize(), userController.getUser)
+router.patch('/:userId', validateUser, authorize(), userController.updateUser)
+router.delete('/:userId', authorize(2), userController.deleteUser)
 
 module.exports = router

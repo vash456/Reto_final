@@ -9,7 +9,7 @@ const login = async (req, res) => {
         const token = jwt.sign({ id: user.id, username: user.username, kind: user.kind }, process.env.JWT_KEY)
         res.status(201).json({ success: true, token });
     } catch (err) {
-        res.status(401).json({ success: false, message: 'Datos incorrectas' });
+        res.status(401).json({ success: false, message: 'Invalid Credentials' });
     }
 };
 
@@ -20,6 +20,7 @@ const logout = async (req, res) => {
     //     }
     //     res.send('Logout successful');
     // })
+    ///res.json(req.body);
 };
 
 module.exports = {

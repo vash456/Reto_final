@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize')
+const { Model, DataTypes, Sequelize } = require('sequelize')
 
 const COMMENT_TABLE = 'COMMENTS'
 
@@ -37,7 +37,8 @@ const CommentSchema = {
         allowNull: false
     },
     created_at: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     },
     status: {
         type: DataTypes.INTEGER,

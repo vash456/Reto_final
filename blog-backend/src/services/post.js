@@ -13,9 +13,9 @@ async function getPost(postId) {
 async function getPostsUser(userId) {
     const posts = await models.Posts.findAll({
         where: {
-          user_id: userId
+        user_id: userId
         }
-      })
+    })
     return posts
 }
 
@@ -32,7 +32,12 @@ async function saveNewPost(title, brief, content, image, status, user_id) {
 }
 
 async function updatePost(postId, title, brief, content, image, status, user_id) {
-    const post = await models.Posts.findByPk(postId)
+    const post = await models.Posts.findOne({
+        where: {
+          id: postId,
+          user_id: user_id
+        }
+    })
     if (!post) {
         throw new Error("Post not found")
     }
