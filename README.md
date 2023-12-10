@@ -9,3 +9,10 @@ npm install joi
 npm install react-router-dom
 npm install react-bootstrap bootstrap
 npm install axios
+
+npm install connect-session-sequelize
+npm install express-session
+
+npm i bcrypt
+
+npm install jsonwebtoken

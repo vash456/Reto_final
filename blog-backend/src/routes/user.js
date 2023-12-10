@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user');
 const validateUser = require('../middlewares/usersValidation')
+const isAuthenticated = require('../middlewares/authValidation')
+
+// Controller or router level middleware
+router.use(isAuthenticated)
 
 // Unprotected endpoints
 router.post('/', validateUser, userController.createUser);
