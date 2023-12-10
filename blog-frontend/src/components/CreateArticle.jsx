@@ -155,14 +155,14 @@ const CreateArticle = ({ userId }) => {
                 autohide
                 style={{
                     position: 'fixed',
-                    top: 30,
+                    top: 60,
                     right: '10%',
                 }}
             >
                 <Toast.Header>
                     <strong className="mr-auto">Éxito!</strong>
                 </Toast.Header>
-                <Toast.Body>Se creó el artículo exitosamente</Toast.Body>
+                <Toast.Body>Se registró exitósamente</Toast.Body>
             </Toast>
 
         </div>

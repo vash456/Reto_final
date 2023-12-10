@@ -1,17 +1,45 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button, Row, Col } from 'react-bootstrap';
 import blogLogo from '../assets/logo.svg';
+import { useAuth } from '../contexts/AuthContext';
 
-const Header = ({ isLoggedIn=true, userName='Juan Carlos', handleLogout }) => {
+const Header = () => {
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const { isLoggedIn, userName, login, logout } = useAuth();
 
-  const handleLogin = () => {
-    console.log(username);
-    console.log(password);
-    console.log('He hecho login')
+  const [userData, setUserData] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/login',{
+        username: userData.username,
+        password: userData.password,
+      });
+      if(response.data.success){
+        console.log('inicio de sesión exitoso');
+        login(userData.username);
+      }else{
+        console.log('Datos incorrectos');
+      }
+    } catch (error) {
+      console.error('Error al enviar solicitud de inicio de sección', error);
+    }
+  }
+
+  const handleLogout = () => {
+    logout();
   }
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -60,17 +88,19 @@ const Header = ({ isLoggedIn=true, userName='Juan Carlos', handleLogout }) => {
             ):(
               <Row>
                 <Col>
-                <FormControl type='text' placeholder='Usuario' value={username} className='mr-2' onChange={(e)=> setUsername(e.target.value)} />
+                <FormControl type='text' name='username' placeholder='Usuario' value={userData.username} className='mr-1' onChange={handleChange} />
                 </Col>
                 <Col>
-                <FormControl type='password' placeholder='Contraseña' value={password} className='mr-2' onChange={(e)=> setPassword(e.target.value)}/>
+                <FormControl type='password' name='password' placeholder='Contraseña' value={userData.password} className='mr-1' onChange={handleChange}/>
                 </Col>
                 <Col>
                 <Button variant='outline-info' className='mr-1' onClick={handleLogin}>Login</Button>
                 </Col>
-                <Nav className='mr-auto'>
-                  <Link to='/registrar-usuario' >Registrarse</Link>
-                </Nav>
+                <Col>
+                  <Nav className='mr-auto'>
+                    <Link to='/registrar-usuario' >Registrarse</Link>
+                  </Nav>
+                </Col>
               </Row>
 
             )}
