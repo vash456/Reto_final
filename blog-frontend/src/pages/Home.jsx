@@ -21,7 +21,7 @@ const Home = () => {
     };
 
     fetchArticles();
-  },);
+  }, []);
 
   const fetchUsernames = async (userIds) => {
     const newUsernameState = { ...usernames };
@@ -45,11 +45,12 @@ const Home = () => {
           <div key={article.id} className="m-3">
             <Article
               key={article.id}
+              numberId={article.id}
               title={article.title}
               brief={article.brief}
               content={article.content}
               image={article.image}
-              createdAt="09-12-2023"
+              createdAt={article.created_at}
               username={usernames[article.user_id] || 'usuario desconocido'}
             />
             </div>
