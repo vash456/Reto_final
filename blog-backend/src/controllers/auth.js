@@ -7,9 +7,9 @@ const login = async (req, res) => {
     try {
         const user = await userService.login(username, password);
         const token = jwt.sign({ id: user.id, username: user.username, kind: user.kind }, process.env.JWT_KEY)
-        res.send(`Token: ${token}`)
+        res.status(201).json({ success: true, token });
     } catch (err) {
-        res.status(401).send('Invalid Credentials')
+        res.status(401).json({ success: false, message: 'Datos incorrectas' });
     }
 };
 
