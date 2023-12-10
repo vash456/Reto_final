@@ -4,7 +4,7 @@ const createUser = async (req, res) => {
     try {
         const { name, lastname, username, email, password, image } = req.body;
         const user = await userService.saveNewUser(name, lastname, username, email, password, image);
-        res.json(user);
+        res.status(201).send('User added successfully')
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -36,7 +36,7 @@ const updateUser = async (req, res) => {
     try {
         const { name, lastname, username, email, password, image } = req.body;
         const user = await userService.updateUser(req.params.id, name, lastname, username, email, password, image);
-        res.json(user);
+        res.status(201).send('User updated successfully')
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
