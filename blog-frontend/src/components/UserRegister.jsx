@@ -41,6 +41,11 @@ const UserRegister = () => {
             isValid = false;
         }
 
+        if(!userData.lastname.trim()) {
+            newErrors.lastname = 'El apellido es obligatorio';
+            isValid = false;
+        }
+
         if(!userData.username.trim()) {
             newErrors.username = 'El username es obligatorio';
             isValid = false;
@@ -122,6 +127,7 @@ const UserRegister = () => {
                         value={userData.lastname}
                         onChange={handleChange}
                     />
+                <Form.Text className="text-danger">{errors.lastname}</Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formUsername" className='mt-3'>
