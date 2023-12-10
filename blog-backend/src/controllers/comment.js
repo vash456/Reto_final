@@ -26,7 +26,7 @@ const getComment = async (req, res) => {
 const getComments = async (req, res) => {
     try {
         const comments = await commentService.getComments();
-        res.status(201).send('Comment updated successfully')
+        res.json(comments);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -49,7 +49,7 @@ const updateComment = async (req, res) => {
     try {
         const { name, comment, email, status, post_id } = req.body;
         const commentResult = await commentService.updateComment(req.params.id, name, comment, email, status, post_id);
-        res.json(commentResult);
+        res.status(201).send('Comment updated successfully')
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
