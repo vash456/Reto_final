@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Button, Form, Toast } from "react-bootstrap";
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { useAuth } from '../contexts/AuthContext';
 
-const CreateArticle = ({ userId }) => {
+const CreateArticle = () => {
+
+    const { userId } = useAuth();
 
     const [articleData, setArticleData] = useState({
         title: '',

@@ -23,13 +23,13 @@ const Header = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/login',{
+      const response = await axios.post('http://localhost:3000/auth/login',{
         username: userData.username,
         password: userData.password,
       });
       if(response.data.success){
         console.log('inicio de sesión exitoso');
-        login(userData.username);
+        login(response.data);
       }else{
         console.log('Datos incorrectos');
       }

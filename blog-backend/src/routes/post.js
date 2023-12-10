@@ -9,7 +9,7 @@ router.get('/:id', postController.getPost)
 router.get('/all', postController.getPosts)
 
 // Controller or router level middleware
-router.use(isAuthenticated)
+// router.use(isAuthenticated)
 
 // Unprotected endpoints
 router.post('/', validatePost, postController.createPost);
