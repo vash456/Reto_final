@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import Article from "../components/Article";
 
@@ -42,7 +43,7 @@ const Home = () => {
       <h1>Lista de Artículos</h1>
       <div className="card-group mt-3">
         {articles.map((article) => (
-          <div key={article.id} className="m-3">
+          <Link to={`/article/${article.id}`} key={article.id} className="m-3">
             <Article
               key={article.id}
               numberId={article.id}
@@ -53,7 +54,7 @@ const Home = () => {
               createdAt={article.created_at}
               username={usernames[article.user_id] || 'usuario desconocido'}
             />
-            </div>
+          </Link>
         ))}
       </div>
     </div>

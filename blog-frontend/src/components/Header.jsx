@@ -29,7 +29,7 @@ const Header = () => {
       });
       if(response.data.success){
         console.log('inicio de sesión exitoso');
-        login(userData.username);
+        login(response.data);
       }else{
         console.log('Datos incorrectos');
       }

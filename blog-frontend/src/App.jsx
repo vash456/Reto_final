@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import CreateArticle from './components/CreateArticle';
 import UserRegister from './components/UserRegister';
+import ArticleDetails from './pages/ArticleDetails';
 
 import './App.css';
 
@@ -12,7 +13,8 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element = {<Home/>} />
-        <Route path='/crear-articulo' element = {<CreateArticle userId = {1}/>} />
+        <Route path='/crear-articulo' element = {<CreateArticle />} />
+        <Route path='/article/:id' element = {<ArticleDetails />} />
         <Route path='/registrar-usuario' element = {<UserRegister />} />
       </Routes>
     </Router>
