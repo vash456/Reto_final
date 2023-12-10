@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button, Row, Col } from 'react-bootstrap';
 import blogLogo from '../assets/logo.svg';
 
-const Header = ({ isLoggedIn=true, userName='Juan Carlos', handleLogout }) => {
+const Header = ({ isLoggedIn=false, userName='Juan Carlos', handleLogout }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -60,17 +60,19 @@ const Header = ({ isLoggedIn=true, userName='Juan Carlos', handleLogout }) => {
             ):(
               <Row>
                 <Col>
-                <FormControl type='text' placeholder='Usuario' value={username} className='mr-2' onChange={(e)=> setUsername(e.target.value)} />
+                <FormControl type='text' placeholder='Usuario' value={username} className='mr-1' onChange={(e)=> setUsername(e.target.value)} />
                 </Col>
                 <Col>
-                <FormControl type='password' placeholder='Contraseña' value={password} className='mr-2' onChange={(e)=> setPassword(e.target.value)}/>
+                <FormControl type='password' placeholder='Contraseña' value={password} className='mr-1' onChange={(e)=> setPassword(e.target.value)}/>
                 </Col>
                 <Col>
                 <Button variant='outline-info' className='mr-1' onClick={handleLogin}>Login</Button>
                 </Col>
-                <Nav className='mr-auto'>
-                  <Link to='/registrar-usuario' >Registrarse</Link>
-                </Nav>
+                <Col>
+                  <Nav className='mr-auto'>
+                    <Link to='/registrar-usuario' >Registrarse</Link>
+                  </Nav>
+                </Col>
               </Row>
 
             )}
