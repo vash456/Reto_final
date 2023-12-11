@@ -28,7 +28,7 @@ const Home = () => {
     const newUsernameState = { ...usernames };
     for(const userId of userIds) {
       try{
-        const userResponse= await axios.get(`http://localhost:3000/users/${userId}`);
+        const userResponse= await axios.get(`http://localhost:3000/users/username/${userId}`);
         newUsernameState[userId] = userResponse.data.username;
       }catch(error){
         console.error("Error al obtener el username", error);

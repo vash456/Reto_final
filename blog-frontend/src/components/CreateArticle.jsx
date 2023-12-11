@@ -5,12 +5,13 @@ import { useAuth } from '../contexts/AuthContext';
 
 const CreateArticle = () => {
 
-    const { userId } = useAuth();
+    const { userId, userToken } = useAuth();
 
     const [articleData, setArticleData] = useState({
         title: '',
         brief: '',
         content: '',
+        status: 1,
         user_id: userId,
     });
 
@@ -62,19 +63,24 @@ const CreateArticle = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(userId);
 
         if(!validateForm()){
             return;
         }
 
         try {
-            const response = await axios.post('http://localhost:3000/posts', {
+            const response = await axios.post(`http://localhost:3000/posts/create/${userId}`, {
                 title: articleData.title,
                 brief: articleData.brief,
                 content: articleData.content,
+                status: 1,
                 user_id: userId,
             }, {
                 withCredentials: true,
+                headers: {
+                    Authorization: userToken
+                }
             });
 
             // Mostrar mensaje de exito al enviar los datos
