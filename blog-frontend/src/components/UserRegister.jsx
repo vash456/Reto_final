@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Form, Toast } from "react-bootstrap";
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const UserRegister = () => {
+
+    const navigate = useNavigate();
 
     const [userData, setUserData] = useState({
         name: '',
@@ -97,9 +99,17 @@ const UserRegister = () => {
 
     };
 
+    useEffect(() => {
+        if (isRegistered) {
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
+        }
+    }, [isRegistered, navigate]);
+
     return (
         <div className='mt-5 mx-auto' style={{background: '#4285f4', padding: '20px', maxWidth: '500px', borderRadius:'10px'}}>
-            {isRegistered && <Navigate to="/" />}
+            {/* {isRegistered && <Navigate to="/" />} */}
             <Form style={{ maxWidth: '480px' }} onSubmit={handleSubmit}>
                 <h3 className="text-center">Regístrate</h3>
                 <Form.Group controlId="formName" className='mt-3'>

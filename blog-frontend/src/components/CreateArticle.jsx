@@ -63,7 +63,6 @@ const CreateArticle = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(userId);
 
         if(!validateForm()){
             return;
