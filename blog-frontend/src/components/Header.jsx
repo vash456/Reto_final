@@ -91,6 +91,8 @@ const Header = () => {
                 onToggle = {handleDropdownToggle}
                 style={{color:'#ffc107'}}
               >
+                <Link to='/mis-articulos' className='dropdown-item' onClick={handleDropdownClose}>Mis artículos</Link>
+                <NavDropdown.Divider />
                 <Link to='/crear-articulo' className='dropdown-item' onClick={handleDropdownClose}>Crear Artículo</Link>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>

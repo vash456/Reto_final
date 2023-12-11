@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import CreateArticle from './components/CreateArticle';
 import UserRegister from './components/UserRegister';
 import ArticleDetails from './pages/ArticleDetails';
+import MyArticles from './pages/MyArticles'
 
 import './App.css';
 
@@ -17,6 +18,7 @@ const App = () => {
           <Route path='/crear-articulo' element = {<CreateArticle />} />
           <Route path='/article/:id' element = {<ArticleDetails />} />
           <Route path='/registrar-usuario' element = {<UserRegister />} />
+          <Route path='/mis-articulos' element = {<MyArticles />} />
         </Routes>
       </Router>
     </div>
