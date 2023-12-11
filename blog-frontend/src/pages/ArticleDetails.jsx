@@ -73,11 +73,13 @@ const ArticleDetails = () => {
       setComments([...comments, {
         name: userName,
         comment: newComment,
+        post_id: id,
         email: 'userEmail',
-        created_at: "just created"  
+        created_at: new Date().toISOString(),
       }])
-      console.log(comments);
+
       setNewComment('');
+      setOpenTextArea(false);
       
     } catch (error) {
       console.error("Error al agregar comentario", error);

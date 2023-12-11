@@ -7,7 +7,7 @@ const ArticleComments = ({ comments }) => {
         return formatedDate;
       }
     return (
-        <div>
+        <div className='mt-3'>
             {comments.length > 0 ? (
                 comments.map((comment, index) => (
                     <div className="mx-auto" style={{
@@ -37,7 +37,7 @@ const ArticleComments = ({ comments }) => {
 ArticleComments.propTypes = {
     comments: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.number,
         name: PropTypes.string.isRequired,
         comment: PropTypes.string.isRequired,
         email: PropTypes.string,
