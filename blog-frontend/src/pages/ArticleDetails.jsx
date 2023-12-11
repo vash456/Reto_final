@@ -5,17 +5,25 @@ import { useAuth } from '../contexts/AuthContext';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import Form from 'react-bootstrap/Form';
+import ArticleComments from '../components/ArticleComments';
 
 const ArticleDetails = () => {
+
+  const formatDate = (dateString) => {
+    const options = {year: 'numeric', month: 'numeric', day: 'numeric' };
+    const formatedDate = new Date(dateString).toLocaleDateString(undefined, options);
+
+    return formatedDate;
+  }
 
   const { isLoggedIn, userToken, userName } = useAuth();
   const { id } = useParams();
   
   const [articleDetails, setArticleDetails] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
-  const [comments, setComments] = useState([])
-  const [openTextArea, setOpenTextArea] = useState(false);
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+  const [openTextArea, setOpenTextArea] = useState(false);
 
   useEffect(() => {
     const fetchArticleDetails = async () => {
@@ -38,18 +46,22 @@ const ArticleDetails = () => {
 
   },[id]);
 
-  
-  
+  const handleCommentChange = (e) => {
+    setNewComment(e.target.value);
+  }
 
-  const handleCommentSubmit = async () => {
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!newComment.trim()) {
+      return;
+    }
+
     try {
-      // Verifica si el comentario no está vacío
-      if (newComment.trim() === '') {
-        return;
-      }
-      const commentsResponse = await axios.post(`http://localhost:3000/comments/`, {
+
+      await axios.post('http://localhost:3000/comments/', {
         name: userName,
-        comment: newComment,
+        comment: newComment,        
         post_id: id,
         status: 1,
       }, {
@@ -58,9 +70,15 @@ const ArticleDetails = () => {
             Authorization: userToken
           }
       });
-      setComments(commentsResponse.data);
-      // Limpia el campo de comentario después de enviarlo
+      setComments([...comments, {
+        name: userName,
+        comment: newComment,
+        email: 'userEmail',
+        created_at: "just created"  
+      }])
+      console.log(comments);
       setNewComment('');
+      
     } catch (error) {
       console.error("Error al agregar comentario", error);
     }
@@ -76,8 +94,10 @@ const ArticleDetails = () => {
       <br />
       <p>Creado por: {userDetails.username}</p>
       <br />
-      <p>Fecha de creación: {articleDetails.created_at}</p>
-      <h2>Comentarios:</h2>
+      <p>Fecha de creación: {formatDate(articleDetails.created_at)}</p>
+      <br />
+
+      <h2 className='mt-5'>Comentarios:</h2>
       <div>
       {isLoggedIn && (
         <div>
@@ -89,7 +109,7 @@ const ArticleDetails = () => {
             Agregar un comentario
           </Button>
           <Collapse in={openTextArea}>
-            <Form>
+            <Form onSubmit={handleCommentSubmit}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Comentario:</Form.Label>
                 <Form.Control
@@ -98,7 +118,7 @@ const ArticleDetails = () => {
                   as="textarea"
                   rows={3}
                   value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
+                  onChange={handleCommentChange}
                 />
               </Form.Group>
               <Button onClick={handleCommentSubmit}>Comentar</Button>
@@ -106,15 +126,8 @@ const ArticleDetails = () => {
           </Collapse>
         </div>
       )}
-        {comments.map((comment) => (
-          <div border="info" key={comment.id}>
-            <p>Usuario: {comment.name}</p>
-            <p>Comentario: {comment.comment}</p>
-            <p>Email: {comment.email}</p>
-            <p>fecha: {comment.created_at}</p>
-            <br />
-          </div>
-        ))}
+        {/* Resnderizado de la lista de comentarios */}
+        <ArticleComments comments={comments} />
       </div>
     </div>
   );
