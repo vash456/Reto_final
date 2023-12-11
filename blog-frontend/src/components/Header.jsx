@@ -33,8 +33,12 @@ const Header = () => {
         const token = response.data.token;
         const decodedToken = jwtDecode(token);
         const usernameFromToken = decodedToken.username;
-        const userIdFromToken = decodedToken.user_id;
-        login(usernameFromToken, userIdFromToken);
+        const userIdFromToken = decodedToken.id;
+        login(usernameFromToken, userIdFromToken, token);
+        setUserData({
+          username: '',
+          password: '',
+        })
       }else{
         console.log('Datos incorrectos');
       }
