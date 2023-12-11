@@ -40,7 +40,7 @@ const Home = () => {
 
   return (
     <div className="text-center">
-      <h1>Lista de Artículos</h1>
+      <h1 className="text-warning mt-3">Lista de Artículos</h1>
       <div className="card-group mt-3">
         {articles.map((article) => (
           <Link to={`/article/${article.id}`} key={article.id} className="m-3">

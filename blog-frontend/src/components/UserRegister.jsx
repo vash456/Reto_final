@@ -108,7 +108,7 @@ const UserRegister = () => {
     }, [isRegistered, navigate]);
 
     return (
-        <div className='mt-5 mx-auto' style={{background: '#4285f4', padding: '20px', maxWidth: '500px', borderRadius:'10px'}}>
+        <div className='bg-secondary text-dark mt-5 mx-auto' style={{ padding: '20px', maxWidth: '500px', borderRadius:'10px'}}>
             {/* {isRegistered && <Navigate to="/" />} */}
             <Form style={{ maxWidth: '480px' }} onSubmit={handleSubmit}>
                 <h3 className="text-center">Regístrate</h3>

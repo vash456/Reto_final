@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button, Row, Col } from 'react-bootstrap';
@@ -7,7 +7,7 @@ import blogLogo from '../assets/logo.svg';
 import { useAuth } from '../contexts/AuthContext';
 
 const Header = () => {
-
+  const navigate = useNavigate();
   const { isLoggedIn, userName, login, logout } = useAuth();
 
   const [userData, setUserData] = useState({
@@ -49,6 +49,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
+    navigate('/');
   }
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -64,8 +65,8 @@ const Header = () => {
   return (
     <Navbar className='bg-dark expand-lg sticky-top'>
       <Container>
-        <Navbar.Brand className='bg-dark'>
-          <Link to='/'>
+        <Navbar.Brand>
+          <Link to='/' style={{color:'#ffc107'}}>
             <img
               alt="Logo"
               src={blogLogo}
@@ -76,19 +77,19 @@ const Header = () => {
             Crypto Blog
           </Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className='bg-dark' />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
           <Nav className='mr-auto'>
-            <Link to='/' style={{marginRight: '40px'}}>Artículos</Link>
+            <Link to='/' style={{marginRight: '40px', color:'#ffc107'}}>Artículos</Link>
           </Nav>
           <Form inline="true">
             {isLoggedIn ? (
-              <NavDropdown 
+              <NavDropdown
                 title={userName} 
                 id='basic-nav-dropdown' 
                 show = {dropdownOpen}
                 onToggle = {handleDropdownToggle}
-                style={{color:'#007BFF'}}
+                style={{color:'#ffc107'}}
               >
                 <Link to='/crear-articulo' className='dropdown-item' onClick={handleDropdownClose}>Crear Artículo</Link>
                 <NavDropdown.Divider />
@@ -107,7 +108,7 @@ const Header = () => {
                 </Col>
                 <Col>
                   <Nav className='mr-auto'>
-                    <Link to='/registrar-usuario' >Registrarse</Link>
+                    <Link to='/registrar-usuario' style={{color:'#ffc107'}} >Registrarse</Link>
                   </Nav>
                 </Col>
               </Row>
@@ -122,4 +123,3 @@ const Header = () => {
 }
 
 export default Header;
-

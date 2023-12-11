@@ -9,15 +9,17 @@ import './App.css';
 
 const App = () => {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element = {<Home/>} />
-        <Route path='/crear-articulo' element = {<CreateArticle />} />
-        <Route path='/article/:id' element = {<ArticleDetails />} />
-        <Route path='/registrar-usuario' element = {<UserRegister />} />
-      </Routes>
-    </Router>
+    <div className='bg-dark bg-gradient text-white m-0'>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element = {<Home/>} />
+          <Route path='/crear-articulo' element = {<CreateArticle />} />
+          <Route path='/article/:id' element = {<ArticleDetails />} />
+          <Route path='/registrar-usuario' element = {<UserRegister />} />
+        </Routes>
+      </Router>
+    </div>
   );
 };
 

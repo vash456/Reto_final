@@ -9,7 +9,7 @@ const Article = ({ numberId, title, brief, content, image, username, createdAt }
     return formatedDate;
   }
   return (
-    <Card border="info" style={{ width: '18rem' }}>
+    <Card className="bg-secondary bg-gradient" border="info" style={{ width: '25rem' }}>
         <Card.Header>Artículo {numberId}</Card.Header>
         {image && <Card.Img variant="top" src={image} />}
         <Card.Body>

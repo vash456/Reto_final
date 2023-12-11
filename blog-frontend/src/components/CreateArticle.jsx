@@ -99,7 +99,7 @@ const CreateArticle = () => {
     };
 
     return (
-        <div className='mt-3 mx-auto' style={{background: '#4285f4', padding: '20px', maxWidth: '500px', borderRadius:'10px'}}>
+        <div className='mt-3 mx-auto bg-secondary text-dark' style={{ padding: '20px', maxWidth: '500px', borderRadius:'10px'}}>
             <Form style={{ maxWidth: '480px' }} onSubmit={handleSubmit}>
                 <h3 className="text-center">Crear Artículo</h3>
                 <Form.Group controlId="formTitle">

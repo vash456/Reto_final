@@ -14,7 +14,7 @@ const ArticleDetails = () => {
   const [articleDetails, setArticleDetails] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
   const [comments, setComments] = useState([])
-  const [open, setOpen] = useState(false);
+  const [openTextArea, setOpenTextArea] = useState(false);
   const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const ArticleDetails = () => {
   };
 
   return (
-    <div>
+    <div className='text-center'>
       <h1>Titulo: {articleDetails.title}</h1>
       <br />
       <h3>Brief: {articleDetails.brief}</h3>
@@ -78,20 +78,23 @@ const ArticleDetails = () => {
       <br />
       <p>Fecha de creación: {articleDetails.created_at}</p>
       <h2>Comentarios:</h2>
+      <div>
       {isLoggedIn && (
-        <>
+        <div>
           <Button
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpenTextArea(!openTextArea)}
             aria-controls="example-collapse-text"
-            aria-expanded={open}
+            aria-expanded={openTextArea}
           >
-            Comentar
+            Agregar un comentario
           </Button>
-          <Collapse in={open}>
+          <Collapse in={openTextArea}>
             <Form>
               <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Comentario:</Form.Label>
                 <Form.Control
+                  style={{ width: '18rem'}}
+                  className='mx-auto'
                   as="textarea"
                   rows={3}
                   value={newComment}
@@ -101,12 +104,10 @@ const ArticleDetails = () => {
               <Button onClick={handleCommentSubmit}>Comentar</Button>
             </Form>
           </Collapse>
-        </>
+        </div>
       )}
-      
-      <div>
         {comments.map((comment) => (
-          <div key={comment.id}>
+          <div border="info" key={comment.id}>
             <p>Usuario: {comment.name}</p>
             <p>Comentario: {comment.comment}</p>
             <p>Email: {comment.email}</p>
