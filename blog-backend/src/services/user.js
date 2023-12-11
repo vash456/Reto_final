@@ -28,6 +28,11 @@ async function getUser(userId) {
     return user
 }
 
+async function getUsername(userId) {
+    const user = await models.Users.findByPk(userId)
+    return {username: user.username}
+}
+
 async function saveNewUser(name, lastname, username, email, password, image) {
     const hashedPassword = await bcrypt.hash(password, 10)
     const userCreated = await models.Users.create({
@@ -64,6 +69,7 @@ async function deleteUser(userId) {
 module.exports = {
     login,
     getUser,
+    getUsername,
     getUsers,
     deleteUser,
     updateUser,

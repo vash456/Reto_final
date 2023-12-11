@@ -23,6 +23,19 @@ const getUser = async (req, res) => {
     }
 };
 
+const getUsername = async (req, res) => {
+    try {
+        const userId = req.params.userId
+        const user = await userService.getUsername(userId);
+        if (!user) {
+            res.status(404).send('User not found')
+        }
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 const getUsers = async (req, res) => {
     try {
         const users = await userService.getUsers();
@@ -56,6 +69,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
     createUser,
     getUser,
+    getUsername,
     getUsers,
     updateUser,
     deleteUser

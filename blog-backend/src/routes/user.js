@@ -7,6 +7,7 @@ const authorize = require('../middlewares/userRoleValidation');
 
 // Unprotected endpoints
 router.post('/', validateUser, userController.createUser);
+router.get('/username/:userId', userController.getUsername)
 
 // Controller or router level middleware
 router.use(isAuthenticated)
