@@ -22,6 +22,7 @@ const Home = () => {
     };
 
     fetchArticles();
+    
   }, []);
 
   const fetchUsernames = async (userIds) => {
@@ -42,7 +43,10 @@ const Home = () => {
     <div className="text-center">
       <h1 className="text-warning mt-3">Lista de Artículos</h1>
       <div className="card-group mt-3">
-        {articles.map((article) => (
+        {articles
+        .filter((article) => article.status === 1)
+        .reverse()
+        .map((article) => (
           <Link to={`/article/${article.id}`} key={article.id} className="m-3">
             <Article
               key={article.id}
@@ -55,7 +59,8 @@ const Home = () => {
               username={usernames[article.user_id] || 'usuario desconocido'}
             />
           </Link>
-        ))}
+          ))
+        }
       </div>
     </div>
   );

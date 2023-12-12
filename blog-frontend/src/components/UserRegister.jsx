@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const UserRegister = () => {
 
     const navigate = useNavigate();
+    const [showToast, setShowToast] = useState(false);
 
     const [userData, setUserData] = useState({
         name: '',
@@ -15,8 +16,6 @@ const UserRegister = () => {
         password: '',
     });
 
-    const [isRegistered, setIsRegistered] = useState(false);
-
     const [errors, setErrors] = useState({
         name: '',
         username: '',
@@ -24,7 +23,6 @@ const UserRegister = () => {
         password: '',
     });
 
-    const [showToast, setShowToast] = useState(false);
 
     const handleChange = (e) => {
         setUserData({
@@ -90,7 +88,6 @@ const UserRegister = () => {
                 withCredentials: true,
             });
             setShowToast(true);
-            setIsRegistered(true);
             console.log('Respuesta del backend: ', response.data);
 
         }catch(error){
@@ -100,16 +97,15 @@ const UserRegister = () => {
     };
 
     useEffect(() => {
-        if (isRegistered) {
+        if (showToast) {
             setTimeout(() => {
                 navigate('/');
             }, 2000);
         }
-    }, [isRegistered, navigate]);
+    }, [showToast, navigate]);
 
     return (
         <div className='bg-secondary text-dark mt-5 mx-auto' style={{ padding: '20px', maxWidth: '500px', borderRadius:'10px'}}>
-            {/* {isRegistered && <Navigate to="/" />} */}
             <Form style={{ maxWidth: '480px' }} onSubmit={handleSubmit}>
                 <h3 className="text-center">Regístrate</h3>
                 <Form.Group controlId="formName" className='mt-3'>
