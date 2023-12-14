@@ -4,11 +4,14 @@ import axios from "axios";
 import Article from "../components/Article";
 import { useAuth } from '../contexts/AuthContext'
 import { Button, Toast } from 'react-bootstrap'
+import CreateArticle from "../components/CreateArticle";
 
 const MyArticles = () => {
 
     const { userId, userToken, userName } = useAuth();
     const [articles, setArticles] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [isEditingId, setIsEditingId] = useState(null);
     
     //Manejo el mensaje de éxito al eliminar y además lo uso como dependencia para el useEffect
     //Para re-renderizar luego de la eliminación
@@ -35,7 +38,12 @@ const MyArticles = () => {
 
         fetchArticles();
         
-    },[userToken, userId, toastDelete]);
+    },[userToken, userId, toastDelete, isEditing]);
+
+    const handleEdit = async (articleId) => {
+        setIsEditing(true);
+        setIsEditingId(articleId);
+    }
 
 
     const handleDelete = async (articleId) => {
@@ -60,44 +68,55 @@ const MyArticles = () => {
     }
 
     return (
-        <div className="text-center">
-            <h1 className="text-warning mt-3">Artículos de: {userName}</h1>
-            <div className="card-group mt-3">
-                {articles.map((article) => (
-                    article.status === 1 && (
-                    <div key={article.id} className=" m-3">
-                        <Link to={`/article/${article.id}`}>
-                            <Article
-                                key={article.id}
-                                numberId={article.id}
-                                title={article.title}
-                                brief={article.brief}
-                                content={article.content}
-                                image={article.image}
-                                username={userName}
-                                createdAt={article.created_at}
-                            />
-                        </Link>
-                        <Button variant="info">Editar</Button>{' '}
-                        <Button onClick={() => handleDelete(article.id)} variant="danger">Eliminar</Button>{' '}
-                    </div>
-                    )
-                ))}
+        <div>
+        {isEditing ? (
+            <CreateArticle 
+                    isEditing = {isEditing}
+                    setIsEditing={setIsEditing}
+                    articleId={isEditingId}
+                />
+        ):(
+            <div className="text-center">
+                <h1 className="text-warning mt-3">Artículos de: {userName}</h1>
+                <div className="card-group mt-3">
+                    {articles
+                    .filter((article) => article.status === 1)
+                    .reverse()
+                    .map((article) => (
+                        <div key={article.id} className=" m-3">
+                            <Link to={`/article/${article.id}`}>
+                                <Article
+                                    key={article.id}
+                                    numberId={article.id}
+                                    title={article.title}
+                                    brief={article.brief}
+                                    content={article.content}
+                                    image={article.image}
+                                    username={userName}
+                                    createdAt={article.created_at}
+                                />
+                            </Link>
+                            <Button onClick={() => handleEdit(article.id)} variant="info">Editar</Button>{' '}
+                            <Button onClick={() => handleDelete(article.id)} variant="danger">Eliminar</Button>{' '}
+                        </div>
+                    ))}
+                </div>
+                <Toast
+                    show={toastDelete}
+                    onClose={() => setToastDelete(false)}
+                    delay={3000}
+                    autohide
+                    style={{
+                        position: 'fixed',
+                        top: 60,
+                        right: '10%',
+                    }}
+                >
+                    <Toast.Header><strong className="mr-auto">Éxito!</strong></Toast.Header>
+                    <Toast.Body className="bg-dark">Se eliminó el artículo exitósamente</Toast.Body>
+                </Toast>
             </div>
-            <Toast
-                show={toastDelete}
-                onClose={() => setToastDelete(false)}
-                delay={3000}
-                autohide
-                style={{
-                    position: 'fixed',
-                    top: 60,
-                    right: '10%',
-                }}
-            >
-                <Toast.Header><strong className="mr-auto">Éxito!</strong></Toast.Header>
-                <Toast.Body>Se eliminó el artículo exitósamente</Toast.Body>
-            </Toast>
+        )}
         </div>
     );
 };

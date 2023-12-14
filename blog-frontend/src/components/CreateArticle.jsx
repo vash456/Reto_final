@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Toast } from "react-bootstrap";
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
+import PropTypes from 'prop-types';
 
-const CreateArticle = () => {
+const CreateArticle = ( {isEditing = false, setIsEditing, articleId } ) => {
 
     const { userId, userToken } = useAuth();
 
@@ -51,6 +52,21 @@ const CreateArticle = () => {
         return isValid;
     }
 
+    useEffect(() => {
+        if(isEditing === true && articleId){
+            fetchArticleData();
+        }
+    }, []);
+
+    const fetchArticleData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3000/posts/${articleId}`);
+            setArticleData(response.data);
+        } catch (error) {
+            console.error('Error al obtener datos del artículo', error);
+        }
+    } 
+
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         if (selectedFile) {
@@ -60,6 +76,37 @@ const CreateArticle = () => {
             });
         }
     };
+
+    const handleEditSubmit = async (e) =>{
+        e.preventDefault();
+
+        if(!validateForm()){
+            return;
+        }
+
+        try{
+            await axios.patch(`http://localhost:3000/posts/${userId}/${articleId}`, {
+                title: articleData.title,
+                brief: articleData.brief,
+                content: articleData.content,
+                status: 1,
+                user_id: userId,
+            }, {
+                withCredentials: true,
+                headers:{
+                    Authorization: userToken
+                }
+            });
+            setIsEditing(false);
+
+        }catch(error){
+            console.error('Error al actializar los datos', error);
+        }
+    }
+
+    const handleCancelEdit = () => {
+        setIsEditing(false);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -150,8 +197,15 @@ const CreateArticle = () => {
                         onChange={handleFileChange}
                     />
                 </Form.Group>
-                
-                <Button className="mt-2" variant="primary" type="submit">Crear</Button>
+                {isEditing ? (
+                    <div>
+                        <Button className="mt-2" variant="primary" onClick={handleEditSubmit}>Confirmar edición</Button>{' '}
+                        <Button className="mt-2" variant="primary" onClick={handleCancelEdit}>Cancelar</Button>
+                    </div>
+                ):(
+                    <Button className="mt-2" variant="primary" type="submit">Crear</Button>
+                )
+                }
 
             </Form>
 
@@ -175,4 +229,11 @@ const CreateArticle = () => {
         </div>
     );
 };
+
+CreateArticle.propTypes = {
+    isEditing: PropTypes.bool,
+    setIsEditing: PropTypes.func,
+    articleId: PropTypes.number,
+  };
+
 export default CreateArticle;
