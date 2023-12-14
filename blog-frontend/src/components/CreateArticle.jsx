@@ -148,7 +148,11 @@ const CreateArticle = ( {isEditing = false, setIsEditing, articleId } ) => {
     return (
         <div className='mt-3 mx-auto bg-secondary text-dark' style={{ padding: '20px', maxWidth: '500px', borderRadius:'10px'}}>
             <Form style={{ maxWidth: '480px' }} onSubmit={handleSubmit}>
-                <h3 className="text-center">Crear Artículo</h3>
+                {isEditing ? (
+                    <h3 className="text-center">Editar Artículo</h3>
+                ):(
+                    <h3 className="text-center">Crear Artículo</h3>
+                )}
                 <Form.Group controlId="formTitle">
                     <Form.Label className="mt-2">Título *</Form.Label>
                     <Form.Control
