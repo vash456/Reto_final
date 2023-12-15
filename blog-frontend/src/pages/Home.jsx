@@ -2,10 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import Article from "../components/Article";
+import HomePagination from "../components/Pagination";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
   const [usernames, setUsernames] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filteredArticles, setFilteredArticles] = useState([]);
+  const articlesPerPage = 10;
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -39,13 +43,26 @@ const Home = () => {
     setUsernames(newUsernameState);
   };
 
+  useEffect(() => {
+    // Filtrar los artículos con estado 1
+    const filtered = articles.reverse().filter((article) => article.status === 1);
+    setFilteredArticles(filtered);
+  }, [articles]);
+
+  // Paginación
+
+   const indexLastArticle = currentPage * articlesPerPage;
+   const indexFirstArticle = indexLastArticle - articlesPerPage;
+   const currentArticles = filteredArticles.slice(indexFirstArticle,indexLastArticle);
+
+   const paginate = (pagNumber) => setCurrentPage(pagNumber);
+
   return (
     <div className="text-center">
       <h1 className="text-warning mt-3">Lista de Artículos</h1>
       <div className="card-group mt-3">
-        {articles
+        {currentArticles
         .filter((article) => article.status === 1)
-        .reverse()
         .map((article) => (
           <Link to={`/article/${article.id}`} key={article.id} className="m-3">
             <Article
@@ -62,6 +79,7 @@ const Home = () => {
           ))
         }
       </div>
+      <HomePagination paginate={paginate} totalArticles={filteredArticles.length} articlesPerPage={articlesPerPage} />
     </div>
   );
 };
