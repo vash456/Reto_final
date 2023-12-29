@@ -109,6 +109,7 @@ const UserRegister = () => {
             <Form style={{ maxWidth: '480px' }} onSubmit={handleSubmit}>
                 <h3 className="text-center">Regístrate</h3>
                 <Form.Group controlId="formName" className='mt-3'>
+                <Form.Label className="mt-2">Nombre *</Form.Label>
                     <Form.Control
                         type='text'
                         name='name'
@@ -120,6 +121,7 @@ const UserRegister = () => {
                 </Form.Group>
 
                 <Form.Group controlId='formLastname' className='mt-3'>
+                <Form.Label className="mt-2">Apellido *</Form.Label>
                     <Form.Control 
                         type='text'
                         name='lastname'
@@ -131,6 +133,7 @@ const UserRegister = () => {
                 </Form.Group>
 
                 <Form.Group controlId="formUsername" className='mt-3'>
+                <Form.Label className="mt-2">Usuario *</Form.Label>
                     <Form.Control
                         type='text'
                         name='username'
@@ -142,6 +145,7 @@ const UserRegister = () => {
                 </Form.Group>
 
                 <Form.Group controlId='formEmail' className='mt-3'>
+                <Form.Label className="mt-2">Correo *</Form.Label>
                     <Form.Control
                         type='email'
                         name='email'
@@ -153,6 +157,7 @@ const UserRegister = () => {
                 </Form.Group>
 
                 <Form.Group controlId='formPassword' className='mt-3'>
+                <Form.Label className="mt-2">Contraseña *</Form.Label>
                     <Form.Control 
                         type='password'
                         name='password'
